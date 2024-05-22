@@ -20,10 +20,12 @@ class PageComponent extends HTMLElement {
 
   async getTemplate (path) {
     const routes = {
-      '/': 'home.html',
-      '/quienes-somos': 'about.html',
-      '/horarios': 'landing.html',
-      '/actividad': 'product.html'
+      '/': 'login.html',
+      '/order': 'order.html',
+      '/home': 'home.html',
+      '/cart': 'cart.html',
+      '/confirmation': 'confirmation.html',
+      '/summary': 'summary.html'
     }
 
     const filename = routes[path] || '404.html'

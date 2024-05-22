@@ -1,0 +1,7 @@
+body {
+  margin: 0;
+  padding: 1rem;
+  min-height: 100vh;
+  height: 100vh;
+  font-family: "Lato", sans-serif;
+}

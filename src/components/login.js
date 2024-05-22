@@ -17,35 +17,88 @@ class Login extends HTMLElement {
         h2, span, label {
           margin: 0;
           font-family: ;
-          color: hsl(0, 0%, 0%, 1)
+          color: hsla(0, 0%, 100%, 1);
+          font-family: "Lato", sans-serif;
+          font-weight: 550
         }
 
         .login-form {
-          background-color: hsl(257, 91%, 18%)
+          display: flex;
+          flex-direction: column;
+          height: 100vh;
+          padding: 3rem;
+          background-color: hsl(257, 91%, 18%);
+          justify-content: center;
+          align-items: center;
+
+        }
+
+        form {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          gap: 1.2rem
         }
 
         .login-form-title {
-
+          text-align: center;
+          margin-bottom: 1.5rem
         }
 
         .login-form-main {
-          
+          display: flex;
+          flex-direction: column;
+          gap: 2rem
         }
 
         .login-form-email {
-          
+          display: flex;
+          flex-direction: column;
+          gap: .8rem
+        }
+
+        .login-form-email label {
+          font-size: .9rem
+        }
+
+        .login-form-email input {
+          height: 2rem;
+          background-color: hsl(226, 63%, 45%);
+          border: none;
+          border-bottom: 2px solid hsl(226, 51%, 87%);
+          border-radius: 1px
         }
 
         .login-form-password {
-          
+          display: flex;
+          flex-direction: column;
+          gap: .8rem
         }
 
-        .login-form-button {
-          
+        .login-form-password label {
+          font-size: .9rem
+        }
+
+        .login-form-password input {
+          height: 2rem;
+          background-color: hsl(226, 63%, 45%);
+          border: none;
+          border-bottom: 2px solid hsl(226, 51%, 87%);
+          border-radius: 1px
+        }
+
+        .login-form-button button{
+          height: 2.5rem;
+          width: 100%;
+          background-color: hsl(272, 40%, 35%);
+          color: hsla(0, 0%, 100%, 1);
+          border: none;
+          border-radius: 10px
         }
 
         .login-form-recovery {
-          
+          font-size: 1.2rem;
+          text-align: center
         }
 
       </style>
