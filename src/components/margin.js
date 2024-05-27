@@ -3,6 +3,7 @@ class Margin extends HTMLElement {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
     this.space = this.getAttribute('space')
+    this.position = this.getAttribute('position')
   }
 
   connectedCallback () {
@@ -14,10 +15,10 @@ class Margin extends HTMLElement {
       /* html */`
       
       <style>
-        
         .margins {
           margin: 1rem ${this.space}%
         }
+        
       </style>
 
       <div class="margins">

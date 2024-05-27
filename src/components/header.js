@@ -33,6 +33,7 @@ class Header extends HTMLElement {
         </style>
 
         <header>
+          <title-componenet></title-component>
           <slot></slot>
         </header>
       `

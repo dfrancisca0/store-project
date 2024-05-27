@@ -25,12 +25,9 @@ class Login extends HTMLElement {
         .login-form {
           display: flex;
           flex-direction: column;
-          height: 100vh;
           padding: 3rem;
-          background-color: hsl(257, 91%, 18%);
           justify-content: center;
           align-items: center;
-
         }
 
         form {
@@ -105,9 +102,6 @@ class Login extends HTMLElement {
 
       <section class="login-form">
         <form>
-          <div class="login-form-title">
-            <h2>Pedidos</h2>
-          </div>
           <div class="login-form-main">  
             <div class="login-form-email">
               <label for="email">Email</label>
