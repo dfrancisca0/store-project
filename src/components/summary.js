@@ -23,32 +23,24 @@ class Summary extends HTMLElement {
           font-weight: 550
         }
 
-        .order {
+        .summary {
           height: 100vh;
           padding: 1rem;
           background-color: hsl(257, 91%, 18%);
         }
 
-        .order-product {
+        .summary-product {
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          min-height: 80vh;
-          max-height: 80vh;
+          min-height: 70vh;
+          max-height: 70vh;
           overflow-y: scroll
         }
 
         .product-main {
           display: flex;
           justify-content: space-between
-        }
-
-        .product-main-name {
-
-        }
-
-        .product-main-specs {
-
         }
 
         .product-content {
@@ -62,12 +54,23 @@ class Summary extends HTMLElement {
           font-weight: 500
         }
 
-        @media (hover: hover) {
-          button:hover {
-            background-color: hsla(48, 93%, 53%, .8);
-            color: hsla(0, 0%, 0%, 1);
-            border: 5px solid hsla(0, 0%, 0%, 1)
-          }
+        .order-summary {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem
+        }
+
+        .order-summary-main {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .order-summary-main span {
+          font-size: 1.7rem;
+        }
+
+        .order-summary-secondary span {
+          font-weight: 400
         }
 
         .order-summary-button {
@@ -78,6 +81,7 @@ class Summary extends HTMLElement {
         .order-summary-button button {
           height: 2.5rem;
           width: 80%;
+          margin: 2rem;
           padding: .5rem;
           border: none;
           border-radius: 15px;
@@ -85,10 +89,18 @@ class Summary extends HTMLElement {
           font-weight: 550
         }
 
+        @media (hover: hover) {
+          button:hover {
+            background-color: hsla(48, 93%, 53%, .8);
+            color: hsla(0, 0%, 0%, 1);
+            border: 5px solid hsla(0, 0%, 0%, 1)
+          }
+        }
+
       </style>
 
-      <section class="order">
-        <div class="order-product">
+      <section class="summary">
+        <div class="summary-product">
           <div class="product-main">
             <div class="product-main-name">
               <span>Cocacola</span>
@@ -107,9 +119,13 @@ class Summary extends HTMLElement {
           </div>
         </div>
         <div class="order-summary">
-          <span></span>
-          <span></span>
-          <span></span>
+          <div class="order-summary-main">
+            <span>Total</span>
+            <span>180.00€</span>
+          </div>
+          <div class="order-summary-secondary">
+            <span>Impuestos no incluidos</span>
+          </div>
         </div>
         <div class="order-summary-button">
           <button>Finalizar pedido</button>

@@ -23,7 +23,7 @@ class PageComponent extends HTMLElement {
       '/': 'home.html',
       '/login': 'login.html',
       '/order': 'order.html',
-      '/cart': 'cart.html',
+      '/history': 'history.html',
       '/confirmation': 'confirmation.html',
       '/summary': 'summary.html'
     }
