@@ -2,13 +2,20 @@ class Confirmation extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
+    this.data = []
   }
 
-  connectedCallback () {
-    this.render()
+  async connectedCallback () {
+    await this.loadData()
+    await this.render()
   }
 
-  render () {
+  async loadData () {
+    const response = await fetch('src/data/checkout.json')
+    this.data = await response.json()
+  }
+
+  async render () {
     this.shadow.innerHTML =
       /* html */`
       
@@ -50,19 +57,33 @@ class Confirmation extends HTMLElement {
 
       </style>
 
-      <section class="confirmation">
-        <div class="confirmation-title">
-          <h2>Pedido realizado con éxito</h2>
-        </div>
-        <div class="confirmation-text">
-          <p>En breve recibirá un correo con los detalles.</p>
-          <p>La referencia de su pedido es 000000002</p>
-        </div>
-        <div class="confirmation-button">
-          <button>Volver a inicio</button>
-        </div>
-      </section>
+      <section class="confirmation"></section>
       `
+
+    const confirmation = this.shadow.querySelector('.confirmation')
+    const confirmationTitle = document.createElement('div')
+    confirmationTitle.classList.add('confirmation-title')
+    confirmation.appendChild(confirmationTitle)
+
+    const titleElement = document.createElement('h2')
+    titleElement.textContent = 'Pedido realizado con éxito'
+    confirmationTitle.appendChild(titleElement)
+
+    const confirmationText = document.createElement('div')
+    confirmationText.classList.add('confirmation-text')
+    confirmation.appendChild(confirmationText)
+
+    const textElement = document.createElement('p')
+    textElement.textContent = `En breve recibirá un correo con los detalles. La referencia de su pedido es ${this.data.reference}`
+    confirmationText.appendChild(textElement)
+
+    const confirmationButton = document.createElement('div')
+    confirmationButton.classList.add('confirmation-button')
+    confirmation.appendChild(confirmationButton)
+
+    const buttonElement = document.createElement('button')
+    buttonElement.textContent = 'Volver a inicio'
+    confirmationButton.appendChild(buttonElement)
   }
 }
 

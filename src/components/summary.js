@@ -2,13 +2,20 @@ class Summary extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
+    this.data = []
   }
 
-  connectedCallback () {
-    this.render()
+  async connectedCallback () {
+    await this.loadData()
+    await this.render()
   }
 
-  render () {
+  async loadData () {
+    const response = await fetch('src/data/products.json')
+    this.data = await response.json()
+  }
+
+  async render () {
     this.shadow.innerHTML =
       /* html */`
       

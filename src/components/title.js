@@ -23,11 +23,10 @@ class Title extends HTMLElement {
           font-size: 1.2rem;
           font-weight: 550
         }
+
       </style>
 
-      <div class="title">
-      
-      </div>
+      <div class="title"></div>
       `
 
     const title = this.shadow.querySelector('.title')

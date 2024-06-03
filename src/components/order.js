@@ -2,13 +2,20 @@ class Order extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
+    this.data = []
   }
 
-  connectedCallback () {
-    this.render()
+  async connectedCallback () {
+    await this.loadData()
+    await this.render()
   }
 
-  render () {
+  async loadData () {
+    const response = await fetch('src/data/products.json')
+    this.data = await response.json()
+  }
+
+  async render () {
     this.shadow.innerHTML =
       /* html */`
       
@@ -20,7 +27,8 @@ class Order extends HTMLElement {
           color: hsla(0, 0%, 100%, 1);
           font-family: "Lato", sans-serif;
           font-size: 1.2rem;
-          font-weight: 550
+          font-weight: 550;
+          text-transform: capitalize
         }
 
         .order {
@@ -29,26 +37,21 @@ class Order extends HTMLElement {
           background-color: hsl(257, 91%, 18%);
         }
 
+        .order-products {
+          min-height: 80vh;
+          max-height: 80vh;
+        }
         .order-product {
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          min-height: 80vh;
-          max-height: 80vh;
+          padding: 1rem;
           overflow-y: scroll
         }
 
         .product-main {
           display: flex;
           justify-content: space-between
-        }
-
-        .product-main-name {
-
-        }
-
-        .product-main-specs {
-
         }
 
         .product-content {
@@ -116,32 +119,78 @@ class Order extends HTMLElement {
 
       </style>
 
-      <section class="order">
-        <div class="order-product">
-          <div class="product-main">
-            <div class="product-main-name">
-              <span>Cocacola</span>
-            </div>
-            <div class="product-main-specs">
-              <span>90.00€</span>
-            </div>
-          </div>
-          <div class="product-content">
-            <div class="product-description">
-              <span>16u, 330ml</span>
-            </div>
-            <div class="plus-minus-button">
-              <button class="minus">−</button>
-                <input type="number" value="1" class="plus-minus-input"/>
-              <button class="plus">+</button>
-            </div>
-          </div>
-        </div>
-        <div class="order-summary-button">
-          <button>Ver pedido</button>
-        </div>
-      </section>
+      <section class="order"></section>
       `
+    const order = this.shadow.querySelector('.order')
+    const orderProducts = document.createElement('div')
+    orderProducts.classList.add('order-products')
+    order.appendChild(orderProducts)
+
+    this.data.forEach(object => {
+      const orderProduct = document.createElement('div')
+      orderProduct.classList.add('order-product')
+      orderProducts.appendChild(orderProduct)
+
+      const productMain = document.createElement('div')
+      productMain.classList.add('product-main')
+      orderProduct.appendChild(productMain)
+
+      const productMainName = document.createElement('div')
+      productMainName.classList.add('product-main-name')
+      productMain.appendChild(productMainName)
+
+      const nameElement = document.createElement('span')
+      nameElement.textContent = `${object.name}`
+      productMainName.appendChild(nameElement)
+
+      const productMainSpecs = document.createElement('div')
+      productMainSpecs.classList.add('product-main-specs')
+      productMain.appendChild(productMainSpecs)
+
+      const specsElement = document.createElement('span')
+      specsElement.textContent = `${object.packPrice}`
+      productMainSpecs.appendChild(specsElement)
+
+      const productContent = document.createElement('div')
+      productContent.classList.add('product-content')
+      orderProduct.appendChild(productContent)
+
+      const productDescription = document.createElement('div')
+      productDescription.classList.add('product-description')
+      productContent.appendChild(productDescription)
+
+      const descriptionElement = document.createElement('span')
+      descriptionElement.textContent = `${object.packSize}, ${object.unitySize}`
+      productContent.appendChild(descriptionElement)
+
+      const plusMinusButton = document.createElement('div')
+      plusMinusButton.classList.add('plus-minus-button')
+      productContent.appendChild(plusMinusButton)
+
+      const buttonMinusElement = document.createElement('button')
+      buttonMinusElement.classList.add('minus')
+      buttonMinusElement.textContent = '-'
+      plusMinusButton.appendChild(buttonMinusElement)
+
+      const buttonInputElement = document.createElement('input')
+      buttonInputElement.classList.add('plus-minus-input')
+      buttonInputElement.setAttribute('type', 'number')
+      buttonInputElement.setAttribute('value', 1)
+      plusMinusButton.appendChild(buttonInputElement)
+
+      const buttonPlusElement = document.createElement('button')
+      buttonPlusElement.classList.add('plus')
+      buttonPlusElement.textContent = '+'
+      plusMinusButton.appendChild(buttonPlusElement)
+    })
+
+    const orderSummaryButton = document.createElement('div')
+    orderSummaryButton.classList.add('order-summary-button')
+    order.appendChild(orderSummaryButton)
+
+    const summaryButton = document.createElement('button')
+    summaryButton.textContent = 'Ver pedido'
+    orderSummaryButton.appendChild(summaryButton)
   }
 }
 

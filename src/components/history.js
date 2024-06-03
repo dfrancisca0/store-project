@@ -2,13 +2,20 @@ class History extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
+    this.data = []
   }
 
-  connectedCallback () {
-    this.render()
+  async connectedCallback () {
+    await this.loadData()
+    await this.render()
   }
 
-  render () {
+  async loadData () {
+    const response = await fetch('src/data/products.json')
+    this.data = await response.json()
+  }
+
+  async render () {
     this.shadow.innerHTML =
       /* html */`
       
@@ -161,6 +168,53 @@ class History extends HTMLElement {
         </div>
       </section>
       `
+    const history = this.shadow.querySelector('.history')
+    const form = document.createElement('form')
+    history.appendChild(form)
+
+    const historyReference = document.createElement('div')
+    historyReference.classList.add('history-reference')
+    form.appendChild(historyReference)
+
+    const referenceInputElement = document.createElement('input')
+    referenceInputElement.setAttribute('type', 'number')
+    referenceInputElement.setAttribute('name', 'number')
+    referenceInputElement.setAttribute('placeholder', 'Referencia del pedido')
+    historyReference.appendChild(referenceInputElement)
+
+    const referenceButtonElement = document.createElement('button')
+    referenceButtonElement.textContent = 'Buscar por referencia'
+    historyReference.appendChild(referenceButtonElement)
+
+    const historyDate = document.createElement('div')
+    historyDate.classList.add('history-date')
+    form.appendChild(historyDate)
+
+    const dateInputElement = document.createElement('input')
+    dateInputElement.setAttribute('type', 'date')
+    dateInputElement.setAttribute('name', 'date')
+    historyDate.appendChild(dateInputElement)
+
+    const dateButtonElement = document.createElement('button')
+    dateButtonElement.textContent = 'Buscar por fecha'
+    historyDate.appendChild(dateButtonElement)
+
+    const historyList = document.createElement('div')
+
+    // <div class="history-list">
+    //   <ul>
+    //     <li>
+    //       <div class="history-product">
+    //         <div class="history-product-main">
+    //           <span>0000000002</span>
+    //           <span>180€</span>
+    //         </div>
+    //         <div class="history-product-secondary">
+    //           <span>02-05-2024 16:14</span>
+    //           <button>Ver pedido</button>
+    //         </div>
+    //       </div>
+    //     </li>
   }
 }
 

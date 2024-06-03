@@ -14,26 +14,21 @@ class Header extends HTMLElement {
         <style>
           
           header {
-            position: sticky;
+            box-sizing: border-box;
             display: flex;
-            background-color: hsla(0, 0%, 0%, 1);
+            justify-content: space-between;
+            align-items: center;
             height: 4rem;
             width: 100%;
             top: 0;
+            padding: 0 1rem; 
+            background-color: hsla(0, 0%, 0%, 1);
             z-index: 5;
-          }
-
-          .title {
-            margin: 0;
-            color: hsla(0, 0%, 100%, 1);
-            font-family: "Lato", sans-serif;
-            font-weight: 550
           }
 
         </style>
 
         <header>
-          <title-componenet></title-component>
           <slot></slot>
         </header>
       `

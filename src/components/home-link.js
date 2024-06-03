@@ -14,36 +14,25 @@ class HomeLink extends HTMLElement {
       
       <style>
 
-        .home-link {
+        button {
+          background-color: hsl(0, 0%, 0%);
+          border: none;
+        }
+
+        .home-link svg{
+          fill: hsl(0, 0%, 100%);
           display: flex;
-          width: 100%;
+          height: 2rem;
+          width: 2rem;
           cursor: pointer;
         }
 
-/*    Make it work (img - svg)
-        .home-link img {
-          height: 1rem;
-          width: 1rem;
-          fill: hsla(0, 0%, 100%, 1)
-        }
-*/
       </style>
 
-      <section class="home-link"></section>
-      `
-
-    const homeLink = this.shadow.querySelector('.home-link')
-    const homeImage = document.createElement('div')
-    homeImage.classList.add('home-image')
-    homeLink.appendChild(homeImage)
-
-    const itemLink = document.createElement('a')
-    itemLink.setAttribute('href', '/')
-    homeImage.appendChild(itemLink)
-
-    const itemImage = document.createElement('img')
-    itemImage.setAttribute('src', '/public/home.svg')
-    itemLink.appendChild(itemImage)
+      <button class="home-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" /></svg>
+      </button>
+    `
   }
 }
 
