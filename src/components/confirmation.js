@@ -52,9 +52,7 @@ class Confirmation extends HTMLElement {
           font-size: 1rem;
           font-weight: 550
         }
-
-
-
+        
       </style>
 
       <section class="confirmation"></section>

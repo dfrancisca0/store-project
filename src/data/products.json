@@ -3,50 +3,50 @@
     "id": "0001",
     "category": "refresco",
     "name": "coca-cola",
-    "quantity": "50",
+    "quantity": 50,
     "unitySize": "300ml",
     "packSize": "12u",
     "unityPrice": "0.50€",
-    "packPrice": "6.00€"
+    "packPrice": 6.00
   },
   {
     "id": "0002",
     "category": "refresco",
     "name": "coca-cola",
-    "quantity": "20",
-    "unitySize": "1000ml",
+    "quantity": 20,
+    "unitySize": "1000",
     "packSize": "6u",
-    "unityPrice": "1.00€",
-    "packPrice": "6.00€"
+    "unityPrice": "1.00",
+    "packPrice": 6.00
   },
   {
     "id": "0003",
     "category": "refresco",
     "name": "schweppes",
-    "quantity": "50",
-    "unitySize": "500ml",
+    "quantity": 50,
+    "unitySize": "500",
     "packSize": "6u",
-    "unityPrice": "0.80€",
-    "packPrice": "4.80€"
+    "unityPrice": "0.80",
+    "packPrice": 4.80
   },
   {
     "id": "0004",
     "category": "snacks",
     "name": "lays gourmet",
-    "quantity": "5",
-    "unitySize": "300g",
+    "quantity": 5,
+    "unitySize": "300",
     "packSize": "12u",
-    "unityPrice": "1.00€",
-    "packPrice": "12.00€"
+    "unityPrice": "1.00",
+    "packPrice": 12.00
   },
   {
     "id": "0005",
     "category": "snacks",
     "name": "avellanas tostadas",
-    "quantity": "3",
+    "quantity": 3,
     "unitySize": "150g",
     "packSize": "5u",
-    "unityPrice": "3.00€",
-    "packPrice": "15.00€"
+    "unityPrice": "3.00",
+    "packPrice": 15.00
   }
 ]

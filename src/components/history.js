@@ -11,7 +11,7 @@ class History extends HTMLElement {
   }
 
   async loadData () {
-    const response = await fetch('src/data/products.json')
+    const response = await fetch('src/data/purchase-details.json')
     this.data = await response.json()
   }
 
@@ -51,7 +51,8 @@ class History extends HTMLElement {
           background-color:hsl(0, 0%, 100%);
           font-weight: 600;
           border: none;
-          border-radius: 5px
+          border-radius: 5px;
+          cursor: pointer
         }
 
         .history {
@@ -115,58 +116,7 @@ class History extends HTMLElement {
 
       </style>
 
-      <section class="history">
-        <form>
-          <div class="history-reference">
-            <input type="number" name="number" placeholder="Referencia del pedido">
-            <button>Buscar por referencia</button>
-          </div>
-          <div class="history-date">
-            <input type="date" name="date">
-            <button>Buscar por fecha</button>
-          </div>
-        </form>
-        <div class="history-list">
-          <ul>
-            <li>
-              <div class="history-product">
-                <div class="history-product-main">
-                  <span>0000000002</span>
-                  <span>180€</span>
-                </div>
-                <div class="history-product-secondary">
-                  <span>02-05-2024 16:14</span>
-                  <button>Ver pedido</button>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="history-product">
-                <div class="history-product-main">
-                  <span>0000000003</span>
-                  <span>270€</span>
-                </div>
-                <div class="history-product-secondary">
-                  <span>13-05-2024 17:09</span>
-                  <button>Ver pedido</button>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="history-product">
-                <div class="history-product-main">
-                  <span>0000000004</span>
-                  <span>360€</span>
-                </div>
-                <div class="history-product-secondary">
-                  <span>20-05-2024 11:13</span>
-                  <button>Ver pedido</button>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <section class="history"></section>
       `
     const history = this.shadow.querySelector('.history')
     const form = document.createElement('form')
@@ -200,21 +150,44 @@ class History extends HTMLElement {
     historyDate.appendChild(dateButtonElement)
 
     const historyList = document.createElement('div')
+    historyList.classList.add('history-list')
+    history.appendChild(historyList)
 
-    // <div class="history-list">
-    //   <ul>
-    //     <li>
-    //       <div class="history-product">
-    //         <div class="history-product-main">
-    //           <span>0000000002</span>
-    //           <span>180€</span>
-    //         </div>
-    //         <div class="history-product-secondary">
-    //           <span>02-05-2024 16:14</span>
-    //           <button>Ver pedido</button>
-    //         </div>
-    //       </div>
-    //     </li>
+    const historyListElement = document.createElement('ul')
+    historyList.appendChild(historyListElement)
+
+    this.data.forEach(element => {
+      const listElement = document.createElement('li')
+      historyListElement.appendChild(listElement)
+
+      const historyProduct = document.createElement('div')
+      historyProduct.classList.add('history-product')
+      listElement.appendChild(historyProduct)
+
+      const historyProductMain = document.createElement('div')
+      historyProductMain.classList.add('history-product-main')
+      historyProduct.appendChild(historyProductMain)
+
+      const productMainElement = document.createElement('span')
+      productMainElement.textContent = element.reference
+      historyProductMain.appendChild(productMainElement)
+
+      const productMainTotalElement = document.createElement('span')
+      productMainTotalElement.textContent = `${element.total}€`
+      historyProductMain.appendChild(productMainTotalElement)
+
+      const historyProductSecondary = document.createElement('div')
+      historyProductSecondary.classList.add('history-product-secondary')
+      historyProduct.appendChild(historyProductSecondary)
+
+      const productSecondaryElement = document.createElement('span')
+      productSecondaryElement.textContent = `${element.date} ${element.time}`
+      historyProductSecondary.appendChild(productSecondaryElement)
+
+      const productSecondaryButtonElement = document.createElement('button')
+      productSecondaryButtonElement.textContent = 'Ver pedido'
+      historyProductSecondary.appendChild(productSecondaryButtonElement)
+    })
   }
 }
 
