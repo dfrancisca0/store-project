@@ -26,7 +26,8 @@ class PageComponent extends HTMLElement {
       '/history': 'history.html',
       '/confirmation': 'confirmation.html',
       '/summary': 'summary.html',
-      '/plans': 'cards.html'
+      '/plans': 'cards.html',
+      '/admin': 'main-orders.html'
     }
 
     const filename = routes[path] || '404.html'
