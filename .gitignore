@@ -1,0 +1,5 @@
+api/node_modules
+api/package-lock.json
+api/src/config/config.json
+client/node_modules
+client/package-lock.json
