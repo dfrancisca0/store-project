@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  const UserActivationToken = sequelize.define('UserActivationToken',
+  const CustomerCredential = sequelize.define('CustomerCredential',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -7,20 +7,20 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         allowNull: false
       },
-      userId: {
+      customerId: {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      token: {
+      email: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      expirationDate: {
-        type: DataTypes.DATE,
+      password: {
+        type: DataTypes.STRING,
         allowNull: false
       },
-      used: {
-        type: DataTypes.BOOLEAN,
+      lastPasswordChange: {
+        type: DataTypes.DATE,
         allowNull: false
       },
       createdAt: {
@@ -31,7 +31,7 @@ module.exports = function (sequelize, DataTypes) {
       }
     }, {
       sequelize,
-      tableName: 'user_activation_tokens',
+      tableName: 'customer_credentials',
       timestamps: true,
       paranoid: true,
       indexes: [
@@ -42,14 +42,22 @@ module.exports = function (sequelize, DataTypes) {
           fields: [
             { name: 'id' }
           ]
+        },
+        {
+          name: 'customer_credentials_customerId_fk',
+          using: 'BTREE',
+          fields: [
+            { name: 'customerId' }
+          ]
         }
       ]
     }
   )
 
-  UserActivationToken.associate = function (models) {
-   
+  CustomerCredential.associate = function (models) {
+    CustomerCredential.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+
   }
 
-  return UserActivationToken
+  return CustomerCredential
 }

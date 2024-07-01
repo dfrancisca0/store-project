@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  const UserResetPasswordToken = sequelize.define('UserResetPasswordToken',
+  const Product = sequelize.define('Product',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -7,19 +7,31 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         allowNull: false
       },
-      userId: {
+      productCategoryId: {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      token: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      expirationDate: {
-        type: DataTypes.DATE,
+      reference: {
+        type: DataTypes.STRING,
         allowNull: false
       },
-      used: {
+      units: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      measurementUnit: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      measurement: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      visible: {
         type: DataTypes.BOOLEAN,
         allowNull: false
       },
@@ -31,7 +43,7 @@ module.exports = function (sequelize, DataTypes) {
       }
     }, {
       sequelize,
-      tableName: 'user_reset_password_tokens',
+      tableName: 'products',
       timestamps: true,
       paranoid: true,
       indexes: [
@@ -44,19 +56,21 @@ module.exports = function (sequelize, DataTypes) {
           ]
         },
         {
-          name: 'user_reset_password_tokens_userId_fk',
+          name: 'products_productCategoryId_fk',
           using: 'BTREE',
           fields: [
-            { name: 'userId' }
+            { name: 'productCategoryId' }
           ]
         }
       ]
     }
   )
 
-  UserResetPasswordToken.associate = function (models) {
-    UserResetPasswordToken.belongsTo(models.User, { as: 'user', foreignKey: 'userId' })
+  Product.associate = function (models) {
+    Product.belongsTo(models.ProductCategory, { as: 'productCategory', foreignKey: 'productCategoryId' })
+    Product.hasMany(models.Price, { as: 'prices', foreignKey: 'productId' })
+    Product.hasMany(models.SaleDetail, { as: 'saleDetails', foreignKey: 'productId' })
   }
 
-  return UserResetPasswordToken
+  return Product
 }

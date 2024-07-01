@@ -7,6 +7,10 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         allowNull: false
       },
+      saleId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
       productId: {
         type: DataTypes.INTEGER,
         allowNull: false
@@ -46,13 +50,37 @@ module.exports = function (sequelize, DataTypes) {
           fields: [
             { name: 'id' }
           ]
+        },
+        {
+          name: 'sale_details_saleId_fk',
+          using: 'BTREE',
+          fields: [
+            { name: 'saleId' }
+          ]
+        },
+        {
+          name: 'sale_details_productId_fk',
+          using: 'BTREE',
+          fields: [
+            { name: 'productId' }
+          ]
+        },
+        {
+          name: 'sale_details_priceId_fk',
+          using: 'BTREE',
+          fields: [
+            { name: 'priceId' }
+          ]
         }
       ]
     }
   )
 
   SaleDetail.associate = function (models) {
-   
+    SaleDetail.belongsTo(models.Sale, { as: 'sale', foreignKey: 'saleId' })
+    SaleDetail.belongsTo(models.Product, { as: 'product', foreignKey: 'productId' })
+    SaleDetail.belongsTo(models.Price, { as: 'price', foreignKey: 'priceId' })
+
   }
 
   return SaleDetail

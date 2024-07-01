@@ -40,7 +40,10 @@ module.exports = function (sequelize, DataTypes) {
   )
 
   User.associate = function (models) {
-   
+    User.hasMany(models.SentEmail, { as: 'sentEmails', foreignKey: 'userId' })
+    User.hasMany(models.UserActivationToken, { as: 'userActivationTokens', foreignKey: 'userId' })
+    User.hasMany(models.UserResetPasswordToken, { as: 'userResetPasswordToken', foreignKey: 'userId' })
+
   }
 
   return User

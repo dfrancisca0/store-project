@@ -10,9 +10,15 @@ module.exports = {
         autoIncrement: true,
         allowNull: false
       },
-      productCategoryId: {
+      productId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'products',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
       basePrice: {
         type: Sequelize.FLOAT,
@@ -34,6 +40,11 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    await queryInterface.addIndex('prices', ['productId'], {
+      name: 'prices_productId_index'
+    })
+
   },
 
   down: async (queryInterface, Sequelize) => {

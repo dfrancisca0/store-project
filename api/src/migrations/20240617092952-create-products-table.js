@@ -12,7 +12,13 @@ module.exports = {
       },
       productCategoryId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'product_categories',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
       name: {
         type: Sequelize.STRING,
@@ -50,6 +56,11 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    await queryInterface.addIndex('products', ['productCategoryId'], {
+      name: 'products_productCategoryId_index'
+    })
+
   },
 
   down: async (queryInterface, Sequelize) => {

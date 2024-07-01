@@ -12,7 +12,13 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
       token: {
         type: Sequelize.STRING,
@@ -38,6 +44,11 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    await queryInterface.addIndex('user_reset_password_tokens', ['userId'], {
+      name: 'user_reset_password_tokens_userId_index'
+    })
+
   },
 
   down: async (queryInterface, Sequelize) => {

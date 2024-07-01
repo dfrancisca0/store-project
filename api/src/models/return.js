@@ -1,10 +1,14 @@
 module.exports = function (sequelize, DataTypes) {
-  const Sale = sequelize.define('Sale',
+  const Return = sequelize.define('Return',
     {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+        allowNull: false
+      },
+      saleId: {
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       customerId: {
@@ -19,11 +23,11 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.FLOAT,
         allowNull: false
       },
-      saleDate: {
+      returnDate: {
         type: DataTypes.DATEONLY,
         allowNull: false
       },
-      saleTime: {
+      returnTime: {
         type: DataTypes.TIME,
         allowNull: false
       },
@@ -35,7 +39,7 @@ module.exports = function (sequelize, DataTypes) {
       }
     }, {
       sequelize,
-      tableName: 'sales',
+      tableName: 'returns',
       timestamps: true,
       paranoid: true,
       indexes: [
@@ -46,14 +50,30 @@ module.exports = function (sequelize, DataTypes) {
           fields: [
             { name: 'id' }
           ]
+        },
+        {
+          name: 'returns_saleId_fk',
+          using: 'BTREE',
+          fields: [
+            { name: 'saleId' }
+          ]
+        },
+        {
+          name: 'returns_customerId_fk',
+          using: 'BTREE',
+          fields: [
+            { name: 'customerId' }
+          ]
         }
       ]
     }
   )
 
-  Sale.associate = function (models) {
-   
+  Return.associate = function (models) {
+    Return.belongsTo(models.Sale, { as: 'sale', foreignKey: 'saleId' })
+    Return.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+
   }
 
-  return Sale
+  return Return
 }

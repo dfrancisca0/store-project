@@ -12,7 +12,13 @@ module.exports = {
       },
       customerId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'customers',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
       token: {
         type: Sequelize.STRING,
@@ -38,6 +44,11 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    await queryInterface.addIndex('customer_reset_password_tokens', ['customerId'], {
+      name: 'customer_reset_password_tokens_customerId_index'
+    })
+
   },
 
   down: async (queryInterface, Sequelize) => {

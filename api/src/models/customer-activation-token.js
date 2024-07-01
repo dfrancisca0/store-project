@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  const CustomerResetPasswordToken = sequelize.define('CustomerResetPasswordToken',
+  const CustomerActivationToken = sequelize.define('CustomerActivationToken',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -31,7 +31,7 @@ module.exports = function (sequelize, DataTypes) {
       }
     }, {
       sequelize,
-      tableName: 'customer_reset_password_tokens',
+      tableName: 'customer_activation_tokens',
       timestamps: true,
       paranoid: true,
       indexes: [
@@ -42,14 +42,21 @@ module.exports = function (sequelize, DataTypes) {
           fields: [
             { name: 'id' }
           ]
+        },
+        {
+          name: 'customer_activation_tokens_customerId_fk',
+          using: 'BTREE',
+          fields: [
+            { name: 'customerId' }
+          ]
         }
       ]
     }
   )
 
-  CustomerResetPasswordToken.associate = function (models) {
-   
+  CustomerActivationToken.associate = function (models) {
+    CustomerActivationToken.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
   }
 
-  return CustomerResetPasswordToken
+  return CustomerActivationToken
 }

@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  const Return = sequelize.define('Return',
+  const UserActivationToken = sequelize.define('UserActivationToken',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -7,28 +7,20 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         allowNull: false
       },
-      saleId: {
+      userId: {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      customerId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      reference: {
+      token: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      totalBasePrice: {
-        type: DataTypes.FLOAT,
+      expirationDate: {
+        type: DataTypes.DATE,
         allowNull: false
       },
-      returnDate: {
-        type: DataTypes.DATEONLY,
-        allowNull: false
-      },
-      returnTime: {
-        type: DataTypes.TIME,
+      used: {
+        type: DataTypes.BOOLEAN,
         allowNull: false
       },
       createdAt: {
@@ -39,7 +31,7 @@ module.exports = function (sequelize, DataTypes) {
       }
     }, {
       sequelize,
-      tableName: 'returns',
+      tableName: 'user_activation_tokens',
       timestamps: true,
       paranoid: true,
       indexes: [
@@ -50,14 +42,21 @@ module.exports = function (sequelize, DataTypes) {
           fields: [
             { name: 'id' }
           ]
+        },
+        {
+          name: 'user_activation_tokens_userId_fk',
+          using: 'BTREE',
+          fields: [
+            { name: 'userId' }
+          ]
         }
       ]
     }
   )
 
-  Return.associate = function (models) {
-   
+  UserActivationToken.associate = function (models) {
+    UserActivationToken.belongsTo(models.User, { as: 'user', foreignKey: 'userId' })
   }
 
-  return Return
+  return UserActivationToken
 }

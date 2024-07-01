@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  const Company = sequelize.define('Company',
+  const UserCredential = sequelize.define('UserCredential',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -7,21 +7,21 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         allowNull: false
       },
-      commercialAddress: {
-        type: DataTypes.STRING,
-        allowNull: false 
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
-      fiscalAddress: {
+      email: {
         type: DataTypes.STRING,
-        allowNull: false 
+        allowNull: false
       },
-      commercialName: {
+      password: {
         type: DataTypes.STRING,
-        allowNull: false 
+        allowNull: false
       },
-      vatNumber: {
-        type: DataTypes.STRING,
-        allowNull: false 
+      lastPasswordChange: {
+        type: DataTypes.DATE,
+        allowNull: false
       },
       createdAt: {
         type: DataTypes.DATE
@@ -31,7 +31,7 @@ module.exports = function (sequelize, DataTypes) {
       }
     }, {
       sequelize,
-      tableName: 'companies',
+      tableName: 'user_credentials',
       timestamps: true,
       paranoid: true,
       indexes: [
@@ -42,14 +42,21 @@ module.exports = function (sequelize, DataTypes) {
           fields: [
             { name: 'id' }
           ]
+        },
+        {
+          name: 'user_credentials_userId_fk',
+          using: 'BTREE',
+          fields: [
+            { name: 'userId' }
+          ]
         }
       ]
     }
   )
 
-  Company.associate = function (models) {
-   
+  UserCredential.associate = function (models) {
+    UserCredential.belongsTo(models.User, { as: 'user', foreignKey: 'userId' })
   }
 
-  return Company
+  return UserCredential
 }

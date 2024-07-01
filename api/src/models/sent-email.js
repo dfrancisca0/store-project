@@ -50,13 +50,20 @@ module.exports = function (sequelize, DataTypes) {
           fields: [
             { name: 'id' }
           ]
+        },
+        {
+          name: 'sent_emails_userId_fk',
+          using: 'BTREE',
+          fields: [
+            { name: 'userId' }
+          ]
         }
       ]
     }
   )
 
   SentEmail.associate = function (models) {
-   
+    SentEmail.belongsTo(models.User, { as: 'user', foreignKey: 'userId' })
   }
 
   return SentEmail

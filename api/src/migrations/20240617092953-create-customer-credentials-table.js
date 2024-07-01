@@ -12,7 +12,13 @@ module.exports = {
       },
       customerId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'customers',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
       email: {
         type: Sequelize.STRING,
@@ -38,6 +44,11 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    await queryInterface.addIndex('customer_credentials', ['customerId'], {
+      name: 'customer_credentials_customerId_index'
+    })
+
   },
 
   down: async (queryInterface, Sequelize) => {
