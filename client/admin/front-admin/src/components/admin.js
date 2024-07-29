@@ -50,7 +50,6 @@ class Admin extends HTMLElement {
         <slot></slot>
       </section>
       `
-    
   }
 }
 

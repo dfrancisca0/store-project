@@ -125,7 +125,6 @@ class Form extends HTMLElement {
         </form>
       </section>
       `
-    
   }
 }
 

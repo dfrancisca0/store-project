@@ -21,7 +21,7 @@ class Table extends HTMLElement {
       
       <style>
 
-        h2, li, label {
+        h2, li, span, label {
           margin: 0;
           font-family: ;
           color: hsla(0, 100%, 100%, 1);
@@ -87,6 +87,25 @@ class Table extends HTMLElement {
           padding: 1rem
         }
 
+        .notification {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 1rem;
+          height: 3rem;
+          width: 100%;
+          background-color: hsla(0, 100%, 100%, 1)
+        }
+
+        .notification span {
+          color: hsla(0, 0%, 0%, 1)
+        }
+
+        .notification svg {
+          height: 1rem;
+          width: 1rem
+        }
+
         @media (hover: hover) {
           button:hover {
             cursor: pointer
@@ -142,6 +161,19 @@ class Table extends HTMLElement {
         listElements.appendChild(listElement)
       })  
     })
+
+    const table = this.shadow.querySelector('.table')
+    const notification = document.createElement('div')
+    notification.classList.add('notification')
+    table.appendChild(notification)
+
+    const notificationTextElement = document.createElement('span')
+    notificationTextElement.textContent = '1 registro en total. Mostrando 10 registros por página'
+    notification.appendChild(notificationTextElement)
+
+    const notificationImageElement = document.createElement('svg')
+    notificationImageElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>arrow-left</title><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>'
+    notification.appendChild(notificationImageElement)
   }
 }
 
