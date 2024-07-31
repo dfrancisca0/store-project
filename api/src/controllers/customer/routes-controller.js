@@ -1,7 +1,7 @@
 exports.findAll = (req, res) => {
 
   const routes = {
-    '/cliente/home': 'home.html',
+    '/cliente': 'home.html',
     '/cliente/nuevo-pedido': 'order.html',
     '/cliente/pedidos-anteriores': 'history.html',
   }
