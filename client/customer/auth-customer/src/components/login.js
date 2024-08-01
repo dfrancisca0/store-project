@@ -16,7 +16,6 @@ class Login extends HTMLElement {
 
         h2, span, label {
           margin: 0;
-          font-family: ;
           color: hsla(0, 0%, 100%, 1);
           font-family: "Lato", sans-serif;
           font-weight: 550

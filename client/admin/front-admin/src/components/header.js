@@ -13,6 +13,10 @@ class Header extends HTMLElement {
       /* html */`
         <style>
           
+          *{
+            box-sizing: border-box;
+          }
+
           header {
             box-sizing: border-box;
             display: flex;
@@ -23,7 +27,7 @@ class Header extends HTMLElement {
             top: 0;
             padding: 0 1rem; 
             background-color: hsla(0, 0%, 0%, 1);
-            z-index: 5;
+            z-index: 5
           }
 
         </style>

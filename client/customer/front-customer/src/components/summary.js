@@ -28,7 +28,6 @@ class Summary extends HTMLElement {
 
         span {
           margin: 0;
-          font-family: ;
           color: hsla(0, 0%, 100%, 1);
           font-family: "Lato", sans-serif;
           font-size: 1.2rem;

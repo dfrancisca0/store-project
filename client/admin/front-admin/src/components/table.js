@@ -21,12 +21,15 @@ class Table extends HTMLElement {
       
       <style>
 
+        *{
+          box-sizing: border-box;
+        }
+
         h2, li, span, label {
           margin: 0;
-          font-family: ;
           color: hsla(0, 100%, 100%, 1);
           font-family: "Lato", sans-serif;
-          font-size: .9rem;
+          font-size: .9rem
         }
 
         ul {
@@ -46,7 +49,7 @@ class Table extends HTMLElement {
           display: flex;
           justify-content: space-between;
           width: 100%;
-          background-color: hsla(0, 100%, 100%, 1);
+          background-color: hsla(0, 100%, 100%, 1)
         }
 
         .table-header svg {
@@ -56,11 +59,31 @@ class Table extends HTMLElement {
           padding: .1rem .5rem
         }
 
-        .table-body {
+        .table-body{
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          height: 75vh;
+          max-height: 75vh;
+          overflow-y: auto;
+          width: 100%
+        }
+
+        .table-body::-webkit-scrollbar{
+          background-color: hsl(0, 0%, 100%);
+          width: 0.5rem
+        }
+
+        .table-body::-webkit-scrollbar-thumb{
+          background-color: hsla(272, 40%, 35%, 1)
+        }
+
+        .table-register {
           width: 80%;
         }
 
-        .table-body svg {
+        .table-register svg {
           fill: hsla(257, 91%, 18%, 1);
           height: 2rem;
           width: 2rem;
@@ -70,7 +93,7 @@ class Table extends HTMLElement {
         .entry-header {
           display: flex;
           justify-content: flex-end;
-          background-color: hsla(0, 100%, 100%, 1);
+          background-color: hsla(0, 100%, 100%, 1)
         }
 
         .entry-header-buttons button {
@@ -87,7 +110,7 @@ class Table extends HTMLElement {
           padding: 1rem
         }
 
-        .notification {
+        .table-footer {
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -97,11 +120,11 @@ class Table extends HTMLElement {
           background-color: hsla(0, 100%, 100%, 1)
         }
 
-        .notification span {
+        .table-footer span {
           color: hsla(0, 0%, 0%, 1)
         }
 
-        .notification svg {
+        .table-footer svg {
           height: 1rem;
           width: 1rem
         }
@@ -120,17 +143,27 @@ class Table extends HTMLElement {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>filter-menu</title><path d="M11 11L16.76 3.62A1 1 0 0 0 16.59 2.22A1 1 0 0 0 16 2H2A1 1 0 0 0 1.38 2.22A1 1 0 0 0 1.21 3.62L7 11V16.87A1 1 0 0 0 7.29 17.7L9.29 19.7A1 1 0 0 0 10.7 19.7A1 1 0 0 0 11 18.87V11M13 16L18 21L23 16Z" /></svg>
           </a>
         </div>
+        <div class="table-body">
+        </div>
+        <div class="table-footer">
+          <div class="table-footer-info">
+            <span>1 registro en total. Mostrando 10 registros por página.</span>
+          </div>
+          <div class="table-footer-pagination">
+
+          </div>
+        </div>
       </section>
       `
     this.data.forEach(element => {
-      const table = this.shadow.querySelector('.table')
-      const tableBody = document.createElement('div')
-      tableBody.classList.add('table-body')
-      table.appendChild(tableBody)
+      const tableBody = this.shadow.querySelector('.table-body')
+      const tableRegister = document.createElement('div')
+      tableRegister.classList.add('table-register')
+      tableBody.appendChild(tableRegister)
       
       const bodyEntry = document.createElement('div')
       bodyEntry.classList.add('body-entry')
-      tableBody.appendChild(bodyEntry)
+      tableRegister.appendChild(bodyEntry)
 
       const entryHeader = document.createElement('div')
       entryHeader.classList.add('entry-header')
@@ -161,19 +194,6 @@ class Table extends HTMLElement {
         listElements.appendChild(listElement)
       })  
     })
-
-    const table = this.shadow.querySelector('.table')
-    const notification = document.createElement('div')
-    notification.classList.add('notification')
-    table.appendChild(notification)
-
-    const notificationTextElement = document.createElement('span')
-    notificationTextElement.textContent = '1 registro en total. Mostrando 10 registros por página'
-    notification.appendChild(notificationTextElement)
-
-    const notificationImageElement = document.createElement('svg')
-    notificationImageElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>arrow-left</title><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>'
-    notification.appendChild(notificationImageElement)
   }
 }
 
